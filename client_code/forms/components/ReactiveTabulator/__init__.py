@@ -12,6 +12,7 @@ _null_logger = Logger()
 _null_logger.disabled = True
 _default_options = {
     "data_loader": False,
+    "header_visible": False,
     "loading_indicator": False,
     "selectable": True,
     "pagination": False,
@@ -39,7 +40,6 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
     @store.setter
     def store(self, value):
         self._store = value
-        self._columns = self._store.persisted_class.ui["index"]["columns"]
         self._options["mutator"] = self._store.persisted_class
         self._options["index"] = self._store.persisted_class.key
 
@@ -77,7 +77,9 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
             self._logger = value
 
     def build_tabulator(self):
-        self.logger.debug("ReactivePersistentTabulator.build_tabulator: Building tabulator")
+        self.logger.debug(
+            "ReactivePersistentTabulator.build_tabulator: Building tabulator"
+        )
         tabulator = Tabulator()
         tabulator.options = self.options
         tabulator.columns = self.columns
@@ -88,33 +90,45 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
         self.tabulator = tabulator
 
     @render_effect
+    def loading_visibility(self):
+        if in_designer:
+            return
+        self.loading_panel.visible = self.store.loading
+        
+
+    @render_effect
     def refresh_tabulator(self):
         try:
             _ = self.store.changed
         except AttributeError:
             return
-        
-        self.logger.debug("ReactivePersistenceTabulator.refresh_tabulator: Refreshing tabulator")
+
+        self.logger.debug(
+            "ReactivePersistenceTabulator.refresh_tabulator: Refreshing tabulator"
+        )
         if not self.store.view:
-            self.logger.debug("ReactivePersistenceTabulator.refresh_tabulator: Store is empty. Bailing out.")
+            self.logger.debug(
+                "ReactivePersistenceTabulator.refresh_tabulator: Store is empty. Bailing out."
+            )
             return
         if self.tabulator is None:
-            self.logger.debug("ReactivePersistenceTabulator.refresh_tabulator: No tabulator exists yet. Building it...")
+            self.logger.debug(
+                "ReactivePersistenceTabulator.refresh_tabulator: No tabulator exists yet. Building it..."
+            )
             self.build_tabulator()
             return
         self.tabulator.deselect_row()
         self.tabulator.clear_app_table_cache()
         self.tabulator.set_data()
 
-    def form_refreshing_data_bindings (self, **event_args):
-        self.tabulator.visible = self.store and not self.store.loading
-
     def row_click(self, sender, **event_args):
         sender.deselect_row()
         self.raise_event("row_click", **event_args)
 
     def form_show(self, **event_args):
-        self.logger.debug("ReactivePersistenceTabulator.form_show: Form shown event raised")
+        self.logger.debug(
+            "ReactivePersistenceTabulator.form_show: Form shown event raised"
+        )
         try:
             self.store.initialise()
         except AttributeError:
