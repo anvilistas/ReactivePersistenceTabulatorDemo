@@ -6,9 +6,9 @@ unique_ids:
     forms.components.ReactiveTabulator: '1731084304741819530292745.9788'
     forms.layouts.Main: '1731062800708407524763448.735'
     forms.pages.author.Detail: '1731063504077749734619018.2582'
-    forms.pages.author.Index: '1731063120090835106880806.4418'
+    forms.pages.author.Index: '173108596722021153900560.649254'
     forms.pages.book.Detail: '1731063521528637219448205.3353'
-    forms.pages.book.Index: '1731063067193500236267428.3994'
+    forms.pages.book.Index: '1731086166754765970706735.6113'
   modules:
     forms: '1731061133551283557447632.6057'
     forms.components: '1731068503683675445652055.4076'
