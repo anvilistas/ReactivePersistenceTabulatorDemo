@@ -1,0 +1,31 @@
+.anvil-role-index.tabulator {   
+    background-color: transparent;
+
+    & .tabulator-tableholder .tabulator-table {
+        background-color: transparent;
+    }
+
+    & .tabulator-header .tabulator-col {
+        background-color: %color:Surface%;
+    }
+
+    & .tabulator-row {
+        background-color: %color:Surface Container Low%;
+        border-radius: 24px;
+        border: 0;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        
+        &.tabulator-selectable:hover {
+            background-color: %color:Surface Variant% !important;
+        }
+    
+        &.tabulator-selected {
+            background-color: %color:Secondary Container% !important;
+    
+            &:hover {
+                background-color: %color:Secondary Container% !important;
+            }
+        }
+    }
+}

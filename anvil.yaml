@@ -1,18 +1,62 @@
 allow_embedding: false
+db_schema:
+  author:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: name
+      type: string
+    server: full
+    title: author
+  book:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: isbn_13
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: title
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: published_on
+      type: date
+    - admin_ui: {order: 3, width: 200}
+      name: author
+      target: author
+      type: link_single
+    - admin_ui: {order: 1.5, width: 200}
+      name: edition
+      type: number
+    server: full
+    title: book
 dependencies:
 - config: {}
   dep_id: dep_lin1x4oec0ytd
   resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
   version: {version_tag: v1.2.0}
-name: M3 App 1
+- dep_id: dep_t9ox64qug99gf
+  resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
+  version: {version_tag: v3.0.0}
+- dep_id: dep_r1u9dj7y11f9bk
+  resolution_hints: {app_id: N7KFE4YBWMGWJ5OX, name: anvil-reactive, package_name: anvil_reactive}
+  version: {version_tag: v0.1.0}
+- dep_id: dep_b8r6z3alqhti4r
+  resolution_hints: {app_id: TGQCF3WT6FVL2EM2, name: Tabulator, package_name: tabulator}
+  version: {version_tag: v3.0.4}
+- dep_id: dep_sks0uyauximzmf
+  resolution_hints: {app_id: 3PIDO5P3H4VPEMPL, name: routing, package_name: routing}
+  version: {version_tag: v0.3.2}
+name: Reactive Persistence Tabulator Demo
 native_deps: null
-package_name: M3_App_1
+package_name: app
 runtime_options:
   client_version: '3'
   server_spec: {base: python310-minimal}
   server_version: python3-full
   version: 3
 services:
-- client_config: {}
+- client_config: {enable_v2: true}
   server_config: {}
   source: /runtime/services/tables.yml
+startup: {module: startup, type: module}
+startup_form: null

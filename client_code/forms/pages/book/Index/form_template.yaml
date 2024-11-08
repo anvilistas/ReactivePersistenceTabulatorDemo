@@ -1,0 +1,29 @@
+components_by_slot:
+  content:
+  - components:
+    - layout_properties: {}
+      name: heading_1
+      properties: {text: Books}
+      type: form:dep_lin1x4oec0ytd:_Components.Heading
+    - event_bindings: {click: new_button_click}
+      layout_properties: {}
+      name: new_button
+      properties: {icon: 'mi:add', text: New}
+      type: form:dep_lin1x4oec0ytd:_Components.Button
+    layout_properties: {}
+    name: flow_panel_1
+    properties: {align: justify, vertical_align: middle}
+    type: FlowPanel
+  - components:
+    - event_bindings: {}
+      name: loading_indicator
+      properties: {}
+      type: form:dep_lin1x4oec0ytd:_Components.LinearProgressIndicator
+    layout_properties: {}
+    name: loading_panel
+    properties: {}
+    type: FlowPanel
+is_package: true
+layout:
+  form_event_bindings: {show: form_show}
+  type: form:forms.layouts.Main

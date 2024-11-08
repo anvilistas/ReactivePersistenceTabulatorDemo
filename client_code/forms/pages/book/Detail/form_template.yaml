@@ -1,0 +1,23 @@
+components:
+- layout_properties: {grid_position: 'PDGOTY,AKIEIQ'}
+  name: heading_1
+  properties: {text: Book Detail}
+  type: form:dep_lin1x4oec0ytd:_Components.Heading
+- data_bindings:
+  - {code: self.item.isbn_13, property: text, writeback: true}
+  layout_properties: {grid_position: 'QFQCVW,YAPGJU'}
+  name: text_box_1
+  properties: {appearance: outlined, label: ISBN, text: ''}
+  type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
+- data_bindings:
+  - {code: self.item.title, property: text, writeback: true}
+  layout_properties: {grid_position: 'LYZFKN,ESHXVN'}
+  name: text_box_2
+  properties: {appearance: outlined, label: Title}
+  type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
+- layout_properties: {grid_position: 'ZJYVHU,TWFGZK'}
+  name: actions_panel
+  properties: {}
+  type: form:forms.components.DetailActions
+container: {type: ColumnPanel}
+is_package: true
