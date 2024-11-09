@@ -3,7 +3,7 @@ components:
   - name: linear_progress_indicator_1
     properties: {}
     type: form:dep_lin1x4oec0ytd:_Components.LinearProgressIndicator
-  event_bindings: {show: loading_panel_show}
+  event_bindings: {}
   layout_properties: {grid_position: 'IQCUIR,SIMQKG'}
   name: loading_panel
   properties: {}
