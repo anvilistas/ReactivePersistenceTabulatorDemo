@@ -9,6 +9,6 @@ class Main(MainTemplate):
         self.slots["sidesheet"].clear()
         self.slots["sidesheet"].add_component(content)
         self.layout.show_sidesheet = True
-        
+
     def close_sidesheet_button_click(self, **event_args):
         self.layout.show_sidesheet = False

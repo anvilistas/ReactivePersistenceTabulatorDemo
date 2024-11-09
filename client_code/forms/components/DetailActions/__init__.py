@@ -2,7 +2,6 @@ from ._anvil_designer import DetailActionsTemplate
 
 
 class DetailActions(DetailActionsTemplate):
-    
     def __init__(self, **properties):
         self._store = None
         self._item = None

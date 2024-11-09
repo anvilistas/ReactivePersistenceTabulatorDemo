@@ -49,10 +49,7 @@ def _actions(model, table_name):
             "callable": partial(_update, model),
             "name": f"update_{model}",
         },
-        "delete": {
-            "callable": partial(_delete, model),
-            "name": f"delete_{model}"
-        },
+        "delete": {"callable": partial(_delete, model), "name": f"delete_{model}"},
         "get_view": {
             "callable": partial(_get_view, model, table_name),
             "name": f"get_{model}_view",

@@ -94,7 +94,6 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
         if in_designer:
             return
         self.loading_panel.visible = self.store.loading
-        
 
     @render_effect
     def refresh_tabulator(self):
