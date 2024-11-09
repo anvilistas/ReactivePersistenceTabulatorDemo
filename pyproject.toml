@@ -1,0 +1,5 @@
+[tool.ruff.lint]
+select = ["E", "F", "I001"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["anvil"]

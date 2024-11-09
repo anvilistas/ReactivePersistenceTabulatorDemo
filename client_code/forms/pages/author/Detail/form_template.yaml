@@ -5,10 +5,9 @@ components:
     text: |
       Author Detail
   type: form:dep_lin1x4oec0ytd:_Components.Heading
-- data_bindings:
-  - {code: self.item.name, property: text, writeback: true}
+- data_bindings: []
   layout_properties: {grid_position: 'HQAMJU,SCVYTH'}
-  name: text_box_1
+  name: name_text_box
   properties: {appearance: outlined, label: Name}
   type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
 - layout_properties: {grid_position: 'NHTBXM,IDHEOW'}
