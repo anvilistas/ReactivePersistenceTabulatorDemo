@@ -1,5 +1,4 @@
 from anvil_extras import persistence as ps
-# from app.services import persistence as ps
 from anvil_reactive.main import reactive_class
 
 
