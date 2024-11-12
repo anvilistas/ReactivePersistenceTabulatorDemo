@@ -39,7 +39,7 @@ dependencies:
   version: {branch: master}
 - dep_id: dep_r1u9dj7y11f9bk
   resolution_hints: {app_id: N7KFE4YBWMGWJ5OX, name: anvil-reactive, package_name: anvil_reactive}
-  version: {branch: master}
+  version: {branch: writeback-early}
 - dep_id: dep_b8r6z3alqhti4r
   resolution_hints: {app_id: TGQCF3WT6FVL2EM2, name: Tabulator, package_name: tabulator}
   version: {branch: master}
