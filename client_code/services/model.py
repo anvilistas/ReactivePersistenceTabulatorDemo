@@ -10,6 +10,11 @@ class Author:
     def __str__(self):
         return self.name
 
+    def __eq__(self, other):
+        if not isinstance(other, Author):
+            return NotImplemented
+        return self._store is not None and self._store == other._store
+
 
 @reactive_class
 @ps.persisted_class
