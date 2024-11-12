@@ -42,16 +42,29 @@ class Detail(DetailTemplate):
         # self.author_dropdown.selected_value = self.item["author"]
         self.init_components(**properties)
 
-    @effect
-    def render_1(self):
-        self.author_dropdown.items = globals.stores["author"].dropdown_items
-        # print(self.item["author"], self.author_dropdown.selected_value)
+    # @effect
+    # def render_1(self):
+    #     print("RENDER 1")
+    #     self.author_dropdown.items = globals.stores["author"].dropdown_items
+    #     print(globals.stores["author"].dropdown_items)
+    #     print("RENDER 1 DONE")
+        
+    #     # print(self.item["author"], self.author_dropdown.selected_value)
 
-    @effect
-    def render_2(self):
-        self.author_dropdown.selected_value = self.item["author"]
-        # print(self.item["author"], self.author_dropdown.selected_value)
+    # @effect
+    # def render_2(self):
+    #     print("RENDER 2")
+    #     self.author_dropdown.selected_value = self.item["author"]
+    #     print(self.item["author"])
+    #     print("RENDER 2 DONE")
+    #     # print(self.item["author"], self.author_dropdown.selected_value)
 
-    @effect
-    def render_3(self):
-        print(self.item["author"], self.author_dropdown.selected_value)
+    # @effect
+    # def render_3(self):
+    #     print("RENDER 3")
+    #     print(self.item["author"], self.author_dropdown.selected_value)
+    #     print("RENDER 3 DONE")
+
+    # def form_show(self, **event_args):
+    #     """This method is called when the form is shown on the page"""
+    #     print("SHOW")
