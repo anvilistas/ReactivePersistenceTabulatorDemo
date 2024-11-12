@@ -38,6 +38,10 @@ class PersistedClassStore:
     def list_search(self):
         return list(self.search())
 
+    @property
+    def dropdown_items(self):
+        return [(str(item), item) for item in self.list_search]
+
     def create(self, instance):
         instance.add()
         self._log_action(f"instance {getattr(instance, instance.key)} added.")

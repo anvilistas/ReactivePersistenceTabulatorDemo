@@ -16,7 +16,8 @@ class Detail(DetailTemplate):
         bind(
             self.author_dropdown,
             "items",
-            lambda: [(str(a), a) for a in globals.stores["author"].list_search],
+            globals.stores["author"],
+            "dropdown_items",
         )
         writeback(self.isbn_text_box, "text", self.item, "isbn_13", events=["change"])
         writeback(self.title_text_box, "text", self.item, "title", events=["change"])
