@@ -45,7 +45,7 @@ dependencies:
   version: {branch: master}
 - dep_id: dep_sks0uyauximzmf
   resolution_hints: {app_id: 3PIDO5P3H4VPEMPL, name: routing, package_name: routing}
-  version: {version_tag: v0.3.2}
+  version: {branch: master}
 name: Reactive Persistence Tabulator Demo
 native_deps: null
 package_name: app
