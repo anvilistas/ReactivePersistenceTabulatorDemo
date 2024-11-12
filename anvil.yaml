@@ -33,7 +33,7 @@ dependencies:
 - config: {}
   dep_id: dep_lin1x4oec0ytd
   resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
-  version: {branch: master}
+  version: {branch: stu-dev-dropdown-border-leaking}
 - dep_id: dep_t9ox64qug99gf
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
   version: {branch: master}
@@ -51,7 +51,8 @@ native_deps: null
 package_name: app
 runtime_options:
   client_version: '3'
-  server_spec: {base: python310-minimal}
+  server_spec: null
+  server_spec_disabled: {base: python310-minimal, requirements: ''}
   server_version: python3-full
   version: 3
 services:
