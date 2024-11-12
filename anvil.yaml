@@ -42,7 +42,7 @@ dependencies:
   version: {branch: master}
 - dep_id: dep_b8r6z3alqhti4r
   resolution_hints: {app_id: TGQCF3WT6FVL2EM2, name: Tabulator, package_name: tabulator}
-  version: {version_tag: v3.0.4}
+  version: {branch: master}
 - dep_id: dep_sks0uyauximzmf
   resolution_hints: {app_id: 3PIDO5P3H4VPEMPL, name: routing, package_name: routing}
   version: {version_tag: v0.3.2}
