@@ -1,6 +1,6 @@
-from anvil_reactive.main import signal as signal
 import anvil.server
 from anvil_extras.logging import Logger
+from anvil_reactive.main import reactive_class, signal
 
 try:
     from anvil.designer import in_designer
@@ -34,6 +34,14 @@ class PersistedClassStore:
     def _log_action(self, msg):
         self._logger.debug(f"{self.__class__.__name__}: {msg}")
 
+    @property
+    def list_search(self):
+        return list(self.search())
+
+    @property
+    def dropdown_items(self):
+        return [(str(item), item) for item in self.list_search]
+
     def create(self, instance):
         instance.add()
         self._log_action(f"instance {getattr(instance, instance.key)} added.")
@@ -49,6 +57,11 @@ class PersistedClassStore:
         instance.update()
         self._log_action(f"instance {getattr(instance, instance.key)} updated.")
         self.changed += 1
+
+    def search(self):
+        self.initialise()
+        _ = self.changed
+        return (self.persisted_class(row) for row in self.view.search())
 
     def initialise(self):
         if self.view is None:

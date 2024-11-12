@@ -1,7 +1,8 @@
-from ._anvil_designer import DetailTemplate
-from app.services import model
-from app import globals
 from anvil_reactive.main import writeback
+from app import globals
+from app.services import model
+
+from ._anvil_designer import DetailTemplate
 
 _model = model.Author
 

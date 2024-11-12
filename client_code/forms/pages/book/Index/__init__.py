@@ -1,8 +1,8 @@
 from app import globals
-from ..Detail import Detail
 from app.services import formatters
-from ._anvil_designer import IndexTemplate
 
+from ..Detail import Detail
+from ._anvil_designer import IndexTemplate
 
 _tabulator_columns = [
     {

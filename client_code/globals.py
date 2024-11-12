@@ -1,6 +1,6 @@
-from app.services.storage import PersistedClassStore
+from anvil_extras.logging import DEBUG, Logger
 from app.services import model
-from anvil_extras.logging import Logger, DEBUG
+from app.services.storage import PersistedClassStore
 
 LOG_LEVEL = DEBUG
 
