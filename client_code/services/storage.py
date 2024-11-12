@@ -42,14 +42,12 @@ class PersistedClassStore:
         instance.add()
         self._log_action(f"instance {getattr(instance, instance.key)} added.")
         self.changed += 1
-        self.list.append(instance)
 
     def delete(self, instance):
         key = getattr(instance, instance.key)
         instance.delete()
         self._log_action(f"instance {key} deleted.")
         self.changed += 1
-        self.list = [item for item in self.list if item != instance]
 
     def update(self, instance):
         instance.update()
