@@ -1,7 +1,8 @@
-from ._anvil_designer import ReactiveTabulatorTemplate
+from anvil_extras.logging import Logger
 from anvil_reactive.main import render_effect
 from tabulator.Tabulator import Tabulator
-from anvil_extras.logging import Logger
+
+from ._anvil_designer import ReactiveTabulatorTemplate
 
 try:
     from anvil.designer import in_designer

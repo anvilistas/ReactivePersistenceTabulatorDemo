@@ -1,4 +1,5 @@
 from anvil_extras import persistence as ps
+# from app.services import persistence as ps
 from anvil_reactive.main import reactive_class
 
 
@@ -6,6 +7,9 @@ from anvil_reactive.main import reactive_class
 @ps.persisted_class
 class Author:
     key = "name"
+
+    def __str__(self):
+        return self.name
 
 
 @reactive_class

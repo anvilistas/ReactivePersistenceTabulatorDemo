@@ -13,6 +13,18 @@ components:
   name: title_text_box
   properties: {appearance: outlined, label: Title}
   type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
+- layout_properties: {grid_position: 'NSETTJ,NLLQRR'}
+  name: edition_text_box
+  properties: {appearance: outlined, label: Edition, type: number}
+  type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
+- layout_properties: {grid_position: 'PMGXOE,LFQFLM'}
+  name: published_on_date_picker
+  properties: {placeholder: Published on}
+  type: DatePicker
+- layout_properties: {grid_position: 'RUYIKP,RTHBOQ'}
+  name: author_dropdown
+  properties: {appearance: outlined, label: Author}
+  type: form:dep_lin1x4oec0ytd:_Components.DropdownMenu
 - layout_properties: {grid_position: 'ZJYVHU,TWFGZK'}
   name: actions_panel
   properties: {}
