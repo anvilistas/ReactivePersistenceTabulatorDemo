@@ -16,15 +16,10 @@ def _snakify(text):
     return "".join("_" + c.lower() if c.isupper() else c for c in text).lstrip("_")
 
 
-
-
-
-
-
 class PersistedClassStore:
     changed = signal(0)
     loading = signal(True)
-    
+
     def __init__(self, persisted_class, logger=None, cache=None):
         self._logger = logger or _null_logger
         if in_designer:
