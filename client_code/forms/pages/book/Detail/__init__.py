@@ -1,4 +1,4 @@
-from anvil_reactive.main import bind, writeback
+from anvil_reactive.main import bind, writeback, render_effect
 from app import globals
 from app.services import model
 
@@ -39,3 +39,7 @@ class Detail(DetailTemplate):
             events=["change"],
         )
         self.init_components(**properties)
+
+    @render_effect
+    def render(self):
+        print(self.item["author"], self.author_dropdown.selected_value)
