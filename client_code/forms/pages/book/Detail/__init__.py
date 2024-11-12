@@ -13,7 +13,11 @@ class Detail(DetailTemplate):
         self.actions_panel.store = globals.stores["book"]
         self.item = _model() if item is None else item
         self.actions_panel.item = self.item
-        bind(self.author_dropdown, "items", lambda: globals.dropdown_items["authors"])
+        bind(
+            self.author_dropdown,
+            "items",
+            lambda: [(str(a), a) for a in globals.stores["author"].list_search],
+        )
         writeback(self.isbn_text_box, "text", self.item, "isbn_13", events=["change"])
         writeback(self.title_text_box, "text", self.item, "title", events=["change"])
         writeback(

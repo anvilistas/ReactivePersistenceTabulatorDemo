@@ -9,7 +9,3 @@ stores = {
     "author": PersistedClassStore(model.Author, logger),
     "book": PersistedClassStore(model.Book, logger),
 }
-
-dropdown_items = {
-    "authors": [(str(a), a) for a in stores["author"].list_search],
-}
