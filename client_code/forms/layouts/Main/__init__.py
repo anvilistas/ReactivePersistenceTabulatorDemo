@@ -21,7 +21,6 @@ class Main(MainTemplate):
     def on_navigate(self, **event_args):
         context = router.get_routing_context()
         self.layout.show_sidesheet = context.query.get("detail", False)
-        print(context.query.get("detail", False))
 
     def form_show(self, **event_args):
         if not anvil.designer.in_designer:

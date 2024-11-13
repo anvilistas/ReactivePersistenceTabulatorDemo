@@ -37,8 +37,6 @@ class PersistedClassStore:
     @computed
     @property
     def list_search(self):
-        s = self.search()
-        print(s)
         return list(self.search())
 
     @computed
