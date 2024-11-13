@@ -34,6 +34,11 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
         self.tabulator = None
         self.init_components(**properties)
 
+    def __getattr__(self, attr):
+        if attr == "tabulator":
+            raise AttributeError(attr)
+        return getattr(self.tabulator, attr)
+
     @property
     def store(self):
         return self._store
@@ -87,8 +92,12 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
         tabulator.role = self.role
         tabulator.options.update(app_table=self.store.view)
         tabulator.add_event_handler("row_click", self.row_click)
+        tabulator.add_event_handler("table_built", self.tabulator_built)
         self.add_component(tabulator, full_width_row=True)
         self.tabulator = tabulator
+
+    def tabulator_built(self, **event_args):
+        self.raise_event("ready")
 
     @render_effect
     def loading_visibility(self):
@@ -117,12 +126,13 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
             )
             self.build_tabulator()
             return
-        self.tabulator.deselect_row()
+
+        rows = self.tabulator.getSelectedRows()
         self.tabulator.clear_app_table_cache()
-        self.tabulator.set_data()
+        self.tabulator.replaceData()
+        self.tabulator.selectRow([row.getIndex() for row in rows])
 
     def row_click(self, sender, **event_args):
-        sender.deselect_row()
         self.raise_event("row_click", **event_args)
 
     def form_show(self, **event_args):
