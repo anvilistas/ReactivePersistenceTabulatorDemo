@@ -126,8 +126,11 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
             )
             self.build_tabulator()
             return
+
+        rows = self.tabulator.getSelectedRows()
         self.tabulator.clear_app_table_cache()
-        self.tabulator.set_data()
+        self.tabulator.replaceData()
+        self.tabulator.selectRow([row.getIndex() for row in rows])
 
     def row_click(self, sender, **event_args):
         self.raise_event("row_click", **event_args)
