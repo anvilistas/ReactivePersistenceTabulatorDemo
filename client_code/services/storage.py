@@ -35,12 +35,12 @@ class PersistedClassStore:
         self._logger.debug(f"{self.__class__.__name__}: {msg}")
 
     @computed
-    @property
+    # @property
     def list_search(self):
         return list(self.search())
 
     @computed
-    @property
+    # @property
     def dropdown_items(self):
         return [(str(item), item) for item in self.list_search]
 
