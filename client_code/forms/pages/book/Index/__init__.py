@@ -33,20 +33,20 @@ class Index(IndexTemplate):
     def on_query_change(self, query, **event_args):
         model_key = query.get("m")
         is_new = query.get("new")
-        model = None
-
-        self.tabulator.deselect_row()
+        detail = None
 
         if model_key is not None:
             row = self.tabulator.getRow(model_key)
+            if not row:
+                return
             row.select()
-            model = row.getModel()
-            detail = Detail(model)
+            detail = Detail(row.getModel())
+        elif is_new:
+            detail = Detail()
+        
+        if detail is not None:
             self.layout.add_detail(detail)
 
-        elif is_new:
-            detail = Detail(model)
-            self.layout.add_detail(detail)
 
     def tabulator_row_click(self, sender, row, **event_args):
         row.select()
