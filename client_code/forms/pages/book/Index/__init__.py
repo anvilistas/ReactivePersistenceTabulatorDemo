@@ -52,7 +52,14 @@ class Index(IndexTemplate):
         row.select()
         model = row.getModel()
         model_key = getattr(model, model.key)
-        router.navigate(query={"m": model_key, "detail": True})
+
+        def query(prev):
+            prev_m = prev.get("m")
+            if prev_m == model_key:
+                return {**prev, "detail": not prev.get("detail")}
+            return {"m": model_key, "detail": True}
+
+        router.navigate(query=query)
 
     def new_button_click(self, **event_args):
         router.navigate(query={"new": True, "detail": True})
