@@ -21,4 +21,6 @@ components_by_slot:
     properties: {}
     type: form:forms.components.ReactiveTabulator
 is_package: true
-layout: {type: 'form:forms.layouts.Main'}
+layout:
+  form_event_bindings: {}
+  type: form:forms.layouts.Main

@@ -1,6 +1,6 @@
 import anvil.server
 from anvil_extras.logging import Logger
-from anvil_reactive.main import reactive_class, signal
+from anvil_reactive.main import reactive_class, signal, computed
 
 try:
     from anvil.designer import in_designer
@@ -34,10 +34,14 @@ class PersistedClassStore:
     def _log_action(self, msg):
         self._logger.debug(f"{self.__class__.__name__}: {msg}")
 
+    @computed
     @property
     def list_search(self):
+        s = self.search()
+        print(s)
         return list(self.search())
 
+    @computed
     @property
     def dropdown_items(self):
         return [(str(item), item) for item in self.list_search]

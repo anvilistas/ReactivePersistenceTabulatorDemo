@@ -39,7 +39,7 @@ dependencies:
   version: {branch: master}
 - dep_id: dep_r1u9dj7y11f9bk
   resolution_hints: {app_id: N7KFE4YBWMGWJ5OX, name: anvil-reactive, package_name: anvil_reactive}
-  version: {version_tag: v0.1.0}
+  version: {branch: master}
 - dep_id: dep_b8r6z3alqhti4r
   resolution_hints: {app_id: TGQCF3WT6FVL2EM2, name: Tabulator, package_name: tabulator}
   version: {version_tag: v3.0.4}
@@ -51,7 +51,8 @@ native_deps: null
 package_name: app
 runtime_options:
   client_version: '3'
-  server_spec: {base: python310-minimal}
+  server_spec: null
+  server_spec_disabled: {base: python310-minimal, requirements: ''}
   server_version: python3-full
   version: 3
 services:
