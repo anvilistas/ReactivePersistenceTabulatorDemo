@@ -33,13 +33,13 @@ dependencies:
 - config: {}
   dep_id: dep_lin1x4oec0ytd
   resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
-  version: {version_tag: v1.2.0}
+  version: {version_tag: v1.2.1}
 - dep_id: dep_t9ox64qug99gf
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
   version: {branch: master}
 - dep_id: dep_r1u9dj7y11f9bk
   resolution_hints: {app_id: N7KFE4YBWMGWJ5OX, name: anvil-reactive, package_name: anvil_reactive}
-  version: {version_tag: v0.1.0}
+  version: {version_tag: v0.1.1}
 - dep_id: dep_b8r6z3alqhti4r
   resolution_hints: {app_id: TGQCF3WT6FVL2EM2, name: Tabulator, package_name: tabulator}
   version: {version_tag: v3.0.4}
