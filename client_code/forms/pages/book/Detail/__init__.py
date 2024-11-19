@@ -39,3 +39,6 @@ class Detail(DetailTemplate):
             events=["change"],
         )
         self.init_components(**properties)
+
+    def form_hide(self, **event_args):
+        self.item.reset()

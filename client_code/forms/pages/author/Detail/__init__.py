@@ -15,3 +15,6 @@ class Detail(DetailTemplate):
         self.actions_panel.item = self.item
         writeback(self.name_text_box, "text", self.item, "name", events=["change"])
         self.init_components(**properties)
+
+    def form_hide(self, **event_args):
+        self.item.reset()

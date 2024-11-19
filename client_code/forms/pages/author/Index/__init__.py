@@ -1,3 +1,4 @@
+import m3.components as m3
 from app import globals
 from app.services import formatters
 from routing import router
@@ -13,14 +14,24 @@ _tabulator_columns = [
         "formatter_params": {"attr": "name"},
     },
 ]
+_tabulator_role = "index"
+_store = globals.stores["author"]
+
+
+def close_sidesheet_button_click(**event_args):
+    def query(prev):
+        return {**prev, "detail": False}
+
+    router.navigate(query=query)
 
 
 class Index(IndexTemplate):
     def __init__(self, routing_context: router.RoutingContext, **properties):
         self.routing_context = routing_context
-        self.tabulator.store = globals.stores["author"]
+        self.store = _store
+        self.tabulator.store = _store
         self.tabulator.columns = _tabulator_columns
-        self.tabulator.role = "index"
+        self.tabulator.role = _tabulator_role
         self.tabulator.logger = globals.logger
         self.tabulator.add_event_handler("row_click", self.tabulator_row_click)
         self.tabulator.add_event_handler("ready", self.tabulator_ready)
@@ -40,12 +51,26 @@ class Index(IndexTemplate):
             if not row:
                 return
             row.select()
-            detail = Detail(row.getModel())
+            model = row.getModel()
+            detail = Detail(model)
+            title = m3.Heading(text=f"{self.store.persisted_class.__name__} Details")
         elif is_new:
             detail = Detail()
-        
+            title = m3.Heading(text=f"New {self.store.persisted_class.__name__}")
+
+        close_button = m3.IconButton(icon="mi:close")
+        close_button.add_event_handler("click", close_sidesheet_button_click)
+
         if detail is not None:
-            self.layout.add_detail(detail)
+            sidesheet = self.layout.sidesheet_content
+            sidesheet.slots["anvil-m3-sidesheet"].clear()
+            sidesheet.slots["anvil-m3-sidesheet"].add_component(detail)
+            sidesheet.slots["anvil-m3-sidesheet-title"].clear()
+            sidesheet.slots["anvil-m3-sidesheet-title"].add_component(title)
+            sidesheet.slots["anvil-m3-sidesheet-close-button"].clear()
+            sidesheet.slots["anvil-m3-sidesheet-close-button"].add_component(
+                close_button
+            )
 
     def tabulator_row_click(self, sender, row, **event_args):
         sender.deselect_row()
