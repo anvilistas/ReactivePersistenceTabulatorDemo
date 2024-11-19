@@ -10,26 +10,25 @@ components_by_slot:
     type: form:dep_sks0uyauximzmf:router.NavLink
   sidesheet:
   - components:
-    - event_bindings: {click: close_sidesheet_button_click}
-      layout_properties: {}
-      name: close_sidesheet_button
-      properties: {icon: 'mi:close'}
-      type: form:dep_lin1x4oec0ytd:_Components.IconButton
+    - layout_properties: {slot: anvil-m3-sidesheet-footer}
+      name: footer_text
+      properties: {}
+      type: form:dep_lin1x4oec0ytd:_Components.Text
+    - layout_properties: {slot: anvil-m3-sidesheet}
+      name: header_text
+      properties: {}
+      type: form:dep_lin1x4oec0ytd:_Components.Text
     layout_properties: {}
-    name: flow_panel_1
-    properties: {align: right}
-    type: FlowPanel
+    name: sidesheet_content
+    properties: {}
+    type: form:dep_lin1x4oec0ytd:_Components.SidesheetContent
 is_package: true
 layout:
   form_event_bindings: {hide: form_hide, show: form_show}
-  properties: {show_sidesheet: false}
+  properties: {show_sidesheet: true}
   type: form:dep_lin1x4oec0ytd:Layouts.NavigationDrawerLayout
 slots:
   content:
     index: 0
     set_layout_properties: {}
     target: {name: content, type: slot}
-  sidesheet:
-    index: 1
-    set_layout_properties: {}
-    target: {name: sidesheet, type: slot}

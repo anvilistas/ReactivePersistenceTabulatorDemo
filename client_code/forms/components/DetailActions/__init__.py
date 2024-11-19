@@ -1,3 +1,5 @@
+from anvil_reactive.main import bind
+
 from ._anvil_designer import DetailActionsTemplate
 
 
@@ -23,6 +25,7 @@ class DetailActions(DetailActionsTemplate):
     @item.setter
     def item(self, value):
         self._item = value
+        bind(self.save_button, "enabled", self._item, "_delta")
 
     @property
     def mode(self):

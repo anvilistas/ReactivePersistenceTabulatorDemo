@@ -29,5 +29,7 @@ components:
   name: actions_panel
   properties: {}
   type: form:forms.components.DetailActions
-container: {type: ColumnPanel}
+container:
+  event_bindings: {hide: form_hide}
+  type: ColumnPanel
 is_package: true
