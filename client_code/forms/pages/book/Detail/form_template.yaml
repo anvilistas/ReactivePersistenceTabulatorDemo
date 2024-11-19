@@ -21,8 +21,7 @@ components:
   name: published_on_date_picker
   properties: {placeholder: Published on}
   type: DatePicker
-- event_bindings: {}
-  layout_properties: {grid_position: 'RUYIKP,RTHBOQ'}
+- layout_properties: {grid_position: 'RUYIKP,RTHBOQ'}
   name: author_dropdown
   properties: {appearance: outlined, label: Author}
   type: form:dep_lin1x4oec0ytd:_Components.DropdownMenu

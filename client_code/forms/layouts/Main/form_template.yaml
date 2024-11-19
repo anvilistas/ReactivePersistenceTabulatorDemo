@@ -21,6 +21,7 @@ components_by_slot:
     type: FlowPanel
 is_package: true
 layout:
+  form_event_bindings: {hide: form_hide, show: form_show}
   properties: {show_sidesheet: false}
   type: form:dep_lin1x4oec0ytd:Layouts.NavigationDrawerLayout
 slots:
