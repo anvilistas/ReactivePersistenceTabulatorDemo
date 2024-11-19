@@ -17,11 +17,6 @@ class BookRoute(Route):
     def cache_deps(self, **loader_args):
         return None
 
-    def parse_query(self, query):
-        # Ensure that number like ISBNs are always strings
-        if "m" in query:
-            return {**query, "m": str(query["m"])}
-        return query
 
 class AuthorRoute(Route):
     path = "/authors"
