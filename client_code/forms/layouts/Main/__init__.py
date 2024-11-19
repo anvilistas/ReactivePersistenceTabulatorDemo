@@ -28,4 +28,4 @@ class Main(MainTemplate):
             self.on_navigate()
 
     def form_hide(self, **event_args):
-        router.add_event_handler("navigate", self.on_navigate)
+        router.remove_event_handler("navigate", self.on_navigate)
