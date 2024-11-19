@@ -14,6 +14,7 @@ container:
 custom_component: true
 events:
 - {default_event: true, name: row_click}
+- {name: ready}
 is_package: true
 properties:
 - {default_binding_prop: true, important: true, name: store, type: object}
