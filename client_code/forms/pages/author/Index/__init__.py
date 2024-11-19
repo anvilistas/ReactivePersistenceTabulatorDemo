@@ -48,6 +48,7 @@ class Index(IndexTemplate):
             self.layout.add_detail(detail)
 
     def tabulator_row_click(self, sender, row, **event_args):
+        sender.deselect_row()
         row.select()
         model = row.getModel()
         model_key = getattr(model, model.key)
