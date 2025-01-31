@@ -1,5 +1,5 @@
 import m3.components as m3
-from app import globals
+from app.globals import session
 from app.services import formatters
 from routing import router
 
@@ -15,7 +15,7 @@ _tabulator_columns = [
     },
 ]
 _tabulator_role = "index"
-_store = globals.stores["author"]
+_store = session.stores["author"]
 
 
 def close_sidesheet_button_click(**event_args):
@@ -32,7 +32,7 @@ class Index(IndexTemplate):
         self.tabulator.store = _store
         self.tabulator.columns = _tabulator_columns
         self.tabulator.role = _tabulator_role
-        self.tabulator.logger = globals.logger
+        self.tabulator.logger = session.logger
         self.tabulator.add_event_handler("row_click", self.tabulator_row_click)
         self.tabulator.add_event_handler("ready", self.tabulator_ready)
         self.init_components(**properties)
