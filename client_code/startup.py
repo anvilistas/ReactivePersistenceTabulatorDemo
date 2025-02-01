@@ -1,5 +1,4 @@
-from app import globals  # noqa unused_import
+from app.globals import session
 from app.services import routes  # noqa unused_import
-from routing import router
 
-router.launch()
+session.launch()
