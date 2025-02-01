@@ -31,6 +31,9 @@ class PersistedClassStore:
             f"PersistedClassStore: Initialised for {self.persisted_class.__name__:}"
         )
 
+    def __len__(self):
+        return len(self.view.search()) if self.view is not None else 0
+
     def _log_action(self, msg):
         self._logger.debug(f"{self.__class__.__name__}: {msg}")
 
@@ -43,6 +46,10 @@ class PersistedClassStore:
     @property
     def dropdown_items(self):
         return [(str(item), item) for item in self.list_search]
+
+    def get(self, key):
+        row = anvil.server.call_s(f"get_{self._class_name}", key)
+        return self.persisted_class(row)
 
     def create(self, instance):
         instance.add()
@@ -60,19 +67,19 @@ class PersistedClassStore:
         self._log_action(f"instance {getattr(instance, instance.key)} updated.")
         self.changed += 1
 
-    def search(self):
+    def search(self, *args, **kwargs):
         self.initialise()
         _ = self.changed
-        return (self.persisted_class(row) for row in self.view.search())
+        return (self.persisted_class(row) for row in self.view.search(*args, **kwargs))
 
     def initialise(self):
         if self.view is None:
             self._log_action("no view found. Fetching...")
             self.refresh()
 
-    def refresh(self):
+    def refresh(self, **kwargs):
         self.loading = True
-        self.view = anvil.server.call_s(f"get_{self._class_name}_view")
+        self.view = anvil.server.call_s(f"get_{self._class_name}_view", **kwargs)
         self._log_action("view refreshed.")
         self.changed += 1
         self.loading = False
