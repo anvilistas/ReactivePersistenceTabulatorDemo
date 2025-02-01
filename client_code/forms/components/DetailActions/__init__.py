@@ -1,4 +1,5 @@
 from anvil_reactive.main import bind
+from routing import router
 
 from ._anvil_designer import DetailActionsTemplate
 
@@ -37,7 +38,9 @@ class DetailActions(DetailActionsTemplate):
 
     def delete_button_click(self, **event_args):
         self.store.delete(self.item)
+        router.navigate(query={})
 
     def save_button_click(self, **event_args):
         action = getattr(self.store, self.mode)
         action(self.item)
+        router.navigate(query={})
