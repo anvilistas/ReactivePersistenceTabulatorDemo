@@ -18,13 +18,6 @@ _tabulator_role = "index"
 _store = session.stores["author"]
 
 
-def close_sidesheet_button_click(**event_args):
-    def query(prev):
-        return {**prev, "detail": False}
-
-    router.navigate(query=query)
-
-
 class Index(IndexTemplate):
     def __init__(self, routing_context: router.RoutingContext, **properties):
         self.routing_context = routing_context
@@ -58,19 +51,12 @@ class Index(IndexTemplate):
             detail = Detail()
             title = m3.Heading(text=f"New {self.store.persisted_class.__name__}")
 
-        close_button = m3.IconButton(icon="mi:close")
-        close_button.add_event_handler("click", close_sidesheet_button_click)
-
         if detail is not None:
             sidesheet = self.layout.sidesheet_content
             sidesheet.slots["anvil-m3-sidesheet"].clear()
             sidesheet.slots["anvil-m3-sidesheet"].add_component(detail)
             sidesheet.slots["anvil-m3-sidesheet-title"].clear()
             sidesheet.slots["anvil-m3-sidesheet-title"].add_component(title)
-            sidesheet.slots["anvil-m3-sidesheet-close-button"].clear()
-            sidesheet.slots["anvil-m3-sidesheet-close-button"].add_component(
-                close_button
-            )
 
     def tabulator_row_click(self, sender, row, **event_args):
         sender.deselect_row()

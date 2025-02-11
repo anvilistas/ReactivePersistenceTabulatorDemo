@@ -10,14 +10,15 @@ components_by_slot:
     type: form:dep_sks0uyauximzmf:router.NavLink
   sidesheet:
   - components:
-    - layout_properties: {slot: anvil-m3-sidesheet-footer}
-      name: footer_text
+    - layout_properties: {slot: anvil-m3-sidesheet-title}
+      name: heading_1
       properties: {}
-      type: form:dep_lin1x4oec0ytd:_Components.Text
-    - layout_properties: {slot: anvil-m3-sidesheet}
-      name: header_text
-      properties: {}
-      type: form:dep_lin1x4oec0ytd:_Components.Text
+      type: form:dep_lin1x4oec0ytd:_Components.Heading
+    - event_bindings: {click: close_button_click}
+      layout_properties: {slot: anvil-m3-sidesheet-close-button}
+      name: close_button
+      properties: {icon: 'mi:close'}
+      type: form:dep_lin1x4oec0ytd:_Components.IconButton
     layout_properties: {}
     name: sidesheet_content
     properties: {}
