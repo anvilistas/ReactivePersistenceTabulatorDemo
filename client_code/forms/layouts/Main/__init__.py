@@ -19,3 +19,9 @@ class Main(MainTemplate):
 
     def form_hide(self, **event_args):
         router.remove_event_handler("navigate", self.on_navigate)
+
+    def close_button_click(self, **event_args):
+        def query(prev):
+            return {**prev, "detail": False}
+
+        router.navigate(query=query)
