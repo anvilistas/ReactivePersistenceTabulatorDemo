@@ -1,6 +1,6 @@
 import anvil.server
 from anvil_extras import persistence as ps
-from anvil_reactive.main import reactive_class
+frotm anvil_reactive.main import reactive_class
 
 
 @reactive_class
