@@ -1,7 +1,8 @@
-from anvil.tables import app_tables
 from functools import partial
+
 import anvil.server
-from anvil_extras.logging import Logger, DEBUG
+from anvil.tables import app_tables, batch_delete
+from anvil_extras.logging import DEBUG, Logger
 from app.services import routes  # noqa unused_import
 
 logger = Logger(name="Demo Server", level=DEBUG)
@@ -16,6 +17,13 @@ _templated_models = {
         "ops": ["create", "update", "delete", "get_view"],
     },
 }
+
+
+@anvil.server.callable
+def delete_rows(rows):
+    with batch_delete:
+        for row in rows:
+            row.delete()
 
 
 def _create(model, table_name, attrs):

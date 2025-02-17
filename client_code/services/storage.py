@@ -20,7 +20,13 @@ class PersistedClassStore:
     changed = signal(0)
     loading = signal(True)
 
-    def __init__(self, persisted_class, logger=None, cache=None):
+    def __init__(self, persisted_class, linked_stores=None, logger=None, cache=None):
+        """
+        linked_stores: dict
+            of the form:
+            PersistedClassStore instance: linked column name
+        """
+        self.linked_stores = linked_stores or {}
         self._logger = logger or _null_logger
         if in_designer:
             self._logger.disabled = True
@@ -58,8 +64,15 @@ class PersistedClassStore:
 
     def delete(self, instance):
         key = getattr(instance, instance.key)
-        instance.delete()
-        self._log_action(f"instance {key} deleted.")
+        linked = {
+            store.persisted_class: store.search(**{linked_column: instance._store})
+            for store, linked_column in self.linked_stores.items()
+        }
+        instance.delete(linked=linked)
+        for store in self.linked_stores:
+            self._log_action(f"Refreshing {store.persisted_class.__name__} store")
+            store.refresh()
+        self._log_action(f"{self.persisted_class.__name__} instance {key} deleted.")
         self.changed += 1
 
     def update(self, instance):
@@ -80,6 +93,6 @@ class PersistedClassStore:
     def refresh(self, **kwargs):
         self.loading = True
         self.view = anvil.server.call_s(f"get_{self._class_name}_view", **kwargs)
-        self._log_action("view refreshed.")
+        self._log_action(f"{self._class_name} view refreshed.")
         self.changed += 1
         self.loading = False
