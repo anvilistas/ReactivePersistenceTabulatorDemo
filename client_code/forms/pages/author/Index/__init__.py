@@ -51,11 +51,11 @@ class Index(IndexTemplate):
             detail = Detail()
             title = m3.Heading(text=f"New {self.store.persisted_class.__name__}")
 
+        sidesheet = self.layout.sidesheet_content
+        sidesheet.slots["anvil-m3-sidesheet"].clear()
+        sidesheet.slots["anvil-m3-sidesheet-title"].clear()
         if detail is not None:
-            sidesheet = self.layout.sidesheet_content
-            sidesheet.slots["anvil-m3-sidesheet"].clear()
             sidesheet.slots["anvil-m3-sidesheet"].add_component(detail)
-            sidesheet.slots["anvil-m3-sidesheet-title"].clear()
             sidesheet.slots["anvil-m3-sidesheet-title"].add_component(title)
 
     def tabulator_row_click(self, sender, row, **event_args):
