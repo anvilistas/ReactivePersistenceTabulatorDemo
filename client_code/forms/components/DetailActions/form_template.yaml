@@ -5,7 +5,8 @@ components:
   properties: {appearance: text, icon: 'mi:delete', icon_color: 'theme:Error', text: Delete, text_color: 'theme:Error'}
   type: form:dep_lin1x4oec0ytd:_Components.Button
 - components:
-  - event_bindings: {click: save_button_click}
+  - data_bindings: []
+    event_bindings: {click: save_button_click}
     layout_properties: {}
     name: save_button
     properties: {icon: 'mi:save', text: Save}

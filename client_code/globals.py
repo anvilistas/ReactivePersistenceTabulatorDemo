@@ -5,13 +5,12 @@ from routing import router
 
 _LOG_LEVEL = DEBUG
 _logger = Logger(name="Demo Client", level=_LOG_LEVEL)
+_models = (model.Author, model.Book)
 
 
-def _build_stores(logger):
-    book_store = PersistedClassStore(model.Book, logger)
-    linked = {book_store: "author"}
-    author_store = PersistedClassStore(model.Author, linked_stores=linked, logger=logger)
-    return {"book": book_store, "author": author_store}
+def _build_stores(models, logger):
+    stores = (PersistedClassStore(model, logger) for model in models)
+    return {store._class_name: store for store in stores}
 
 
 class _Session:
@@ -23,7 +22,7 @@ class _Session:
 
     def launch(self):
         self.terminate()
-        self.stores = _build_stores(self.logger)
+        self.stores = _build_stores(_models, self.logger)
         if not self.routing_launched:
             router.launch()
             self.routing_launched = True
