@@ -1,4 +1,4 @@
-from anvil.server import server_method
+from anvil.server import portable_class, server_method
 from anvil.tables import app_tables
 from anvil_reactive.main import reactive_class
 
@@ -26,30 +26,46 @@ class LinkedClass:
         self.klass.get_view().search(**params).delete_all_rows()
 
 
-@reactive_class
-class Book(app_tables.book.Row, buffered=True, attrs=True, client_writable=True):
-    key = "isbn_13"
+@portable_class
+class WithView:
+    table = None
 
     @server_method
     @classmethod
     def get_view(cls):
-        return app_tables.book.client_readable()
+        return cls.table.client_readable()
 
 
-@reactive_class
-class Author(app_tables.author.Row, buffered=True, attrs=True, client_writable=True):
-    key = "name"
-    links = [LinkedClass(Book, column="author", on_delete="restrict")]
-
-    @server_method
-    @classmethod
-    def get_view(cls):
-        return app_tables.author.client_readable()
-
-    def __str__(self):
-        return self.name
+@portable_class
+class WithLinks:
+    links = []
 
     def _do_delete(self, from_client):
         for link in self.links:
             link.on_delete(self)
         super()._do_delete(from_client)
+
+
+@reactive_class
+class Book(
+    WithView, app_tables.book.Row, buffered=True, attrs=True, client_writable=True
+):
+    table = app_tables.book
+    key = "isbn_13"
+
+
+@reactive_class
+class Author(
+    WithLinks,
+    WithView,
+    app_tables.author.Row,
+    buffered=True,
+    attrs=True,
+    client_writable=True,
+):
+    table = app_tables.author
+    key = "name"
+    links = [LinkedClass(Book, column="author", on_delete="restrict")]
+
+    def __str__(self):
+        return self.name
