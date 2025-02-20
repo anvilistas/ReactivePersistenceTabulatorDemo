@@ -53,25 +53,14 @@ class PersistedClassStore:
     def dropdown_items(self):
         return [(str(item), item) for item in self.list_search]
 
-    def get(self, key):
-        row = anvil.server.call_s(f"get_{self._class_name}", key)
-        return self.persisted_class(row)
-
-    def create(self, instance):
-        instance.add()
-        self._log_action(f"instance {getattr(instance, instance.key)} added.")
+    def save(self, instance):
+        instance.save()
+        self._log_action(f"{instance.__class__.__name__} instance {instance.key} saved.")
         self.changed += 1
 
     def delete(self, instance):
         key = getattr(instance, instance.key)
-        linked = {
-            store.persisted_class: store.search(**{linked_column: instance._store})
-            for store, linked_column in self.linked_stores.items()
-        }
-        instance.delete(linked=linked)
-        for store in self.linked_stores:
-            self._log_action(f"Refreshing {store.persisted_class.__name__} store")
-            store.refresh()
+        instance.delete()
         self._log_action(f"{self.persisted_class.__name__} instance {key} deleted.")
         self.changed += 1
 
@@ -83,7 +72,7 @@ class PersistedClassStore:
     def search(self, *args, **kwargs):
         self.initialise()
         _ = self.changed
-        return (self.persisted_class(row) for row in self.view.search(*args, **kwargs))
+        return self.view.search(*args, **kwargs)
 
     def initialise(self):
         if self.view is None:
@@ -92,7 +81,7 @@ class PersistedClassStore:
 
     def refresh(self, **kwargs):
         self.loading = True
-        self.view = anvil.server.call_s(f"get_{self._class_name}_view", **kwargs)
+        self.view = self.persisted_class.get_view()
         self._log_action(f"{self._class_name} view refreshed.")
         self.changed += 1
         self.loading = False
