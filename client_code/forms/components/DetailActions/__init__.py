@@ -26,7 +26,7 @@ class DetailActions(DetailActionsTemplate):
     @item.setter
     def item(self, value):
         self._item = value
-        bind(self.save_button, "enabled", self._item, "_delta")
+        bind(self.save_button, "enabled", self._item, "buffered_changes")
 
     @property
     def mode(self):
@@ -37,10 +37,9 @@ class DetailActions(DetailActionsTemplate):
         self._mode = value
 
     def delete_button_click(self, **event_args):
-        self.store.delete(self.item)
         router.navigate(query={})
+        self.store.delete(self.item)
 
     def save_button_click(self, **event_args):
-        action = getattr(self.store, self.mode)
-        action(self.item)
+        self.store.save(self.item)
         router.navigate(query={})

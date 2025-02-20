@@ -46,7 +46,6 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
     @store.setter
     def store(self, value):
         self._store = value
-        self._options["mutator"] = self._store.persisted_class
         self._options["index"] = self._store.persisted_class.key
 
     @property
