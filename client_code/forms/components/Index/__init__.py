@@ -8,7 +8,7 @@ from ._anvil_designer import IndexTemplate
 class Index(IndexTemplate):
     store = None
     tabulator_columns = None
-    tabulator_role = None
+    tabulator_role = "index"
     title = None
     detail_form = None
     

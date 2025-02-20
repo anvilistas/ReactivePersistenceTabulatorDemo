@@ -14,7 +14,6 @@ class Index(IndexTemplate):
             "formatter_params": {"attr": "name"},
         },
     ]
-    tabulator_role = "index"
     store = session.stores["author"]
     detail_form = Detail
     title = "Authors"
