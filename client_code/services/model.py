@@ -14,9 +14,7 @@ def restrict_on_delete(row, table, column):
 
 def cascade_on_delete(row, table, column):
     params = {column: row}
-    results = table.search(**params)
-    for result in results:
-        result.delete()
+    table.search(**params).delete_all_rows()
 
 
 @reactive_class
