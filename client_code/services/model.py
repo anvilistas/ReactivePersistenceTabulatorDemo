@@ -5,16 +5,25 @@ from anvil_reactive.main import reactive_class
 from .exceptions import ChildExists
 
 
-def restrict_on_delete(row, table, column):
-    params = {column: row}
-    results = table.search(**params)
-    if results:
-        raise ChildExists("Child row found, cannot delete parent row")
+class LinkedClass:
+    def __init__(self, klass, column, on_delete):
+        self.klass = klass
+        self.column = column
+        delete_actions = {
+            "restrict": self.restrict_on_delete,
+            "cascade": self.cascade_on_delete,
+        }
+        self.on_delete = delete_actions[on_delete]
 
+    def restrict_on_delete(self, row):
+        params = {self.column: row}
+        results = self.klass.get_view().search(**params)
+        if results:
+            raise ChildExists("Child row found, cannot delete parent row")
 
-def cascade_on_delete(row, table, column):
-    params = {column: row}
-    table.search(**params).delete_all_rows()
+    def cascade_on_delete(self, row):
+        params = {self.column: row}
+        self.klass.get_view().search(**params).delete_all_rows()
 
 
 @reactive_class
@@ -30,7 +39,7 @@ class Book(app_tables.book.Row, buffered=True, attrs=True, client_writable=True)
 @reactive_class
 class Author(app_tables.author.Row, buffered=True, attrs=True, client_writable=True):
     key = "name"
-    links = [{"class": Book, "column": "author", "on_delete": restrict_on_delete}]
+    links = [LinkedClass(Book, column="author", on_delete="restrict")]
 
     @server_method
     @classmethod
@@ -42,6 +51,5 @@ class Author(app_tables.author.Row, buffered=True, attrs=True, client_writable=T
 
     def _do_delete(self, from_client):
         for link in self.links:
-            view = link["class"].get_view()
-            link["on_delete"](self, view, link["column"])
+            link.on_delete(self)
         super()._do_delete(from_client)
