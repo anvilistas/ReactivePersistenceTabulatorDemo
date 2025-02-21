@@ -3,8 +3,6 @@ from app.globals import session
 from routing import router
 
 from ._anvil_designer import IndexTemplate
-
-
 class Index(IndexTemplate):
     store = None
     tabulator_columns = None
