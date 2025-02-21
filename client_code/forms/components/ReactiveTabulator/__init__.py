@@ -99,12 +99,6 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
         self.raise_event("ready")
 
     @render_effect
-    def loading_visibility(self):
-        if in_designer:
-            return
-        self.loading_panel.visible = self.store.loading
-
-    @render_effect
     def refresh_tabulator(self):
         try:
             _ = self.store.changed
