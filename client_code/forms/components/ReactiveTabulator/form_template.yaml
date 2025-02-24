@@ -1,13 +1,4 @@
-components:
-- components:
-  - name: linear_progress_indicator_1
-    properties: {}
-    type: form:dep_lin1x4oec0ytd:_Components.LinearProgressIndicator
-  event_bindings: {}
-  layout_properties: {grid_position: 'IQCUIR,SIMQKG'}
-  name: loading_panel
-  properties: {}
-  type: FlowPanel
+components: []
 container:
   event_bindings: {show: form_show}
   type: ColumnPanel
