@@ -1,5 +1,4 @@
 import m3.components as m3
-from anvil_reactive.main import bind
 from app.globals import session
 from routing import router
 
@@ -21,7 +20,6 @@ class Index(IndexTemplate):
         self.tabulator.logger = session.logger
         self.tabulator.add_event_handler("row_click", self.tabulator_row_click)
         self.tabulator.add_event_handler("ready", self.tabulator_ready)
-        bind(self.loading_indicator, "visible", self.store, "loading")
         self.init_components(**properties)
 
     def tabulator_ready(self, **event_args):
