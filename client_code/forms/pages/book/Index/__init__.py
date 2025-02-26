@@ -1,4 +1,4 @@
-from app.forms.templates.Index import Index as IndexTemplate
+from app.forms.components.Index import Index as IndexTemplate
 from app.globals import session
 from app.services import formatters
 
