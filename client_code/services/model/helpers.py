@@ -15,7 +15,7 @@ class LinkedClass:
     def restrict_on_delete(self, row):
         params = {self.column: row}
         results = self.klass.get_view().search(**params)
-        if results:
+        if len(results) > 0:
             raise ChildExists("Child row found, cannot delete parent row")
 
     def cascade_on_delete(self, row):
