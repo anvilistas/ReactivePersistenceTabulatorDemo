@@ -1,6 +1,7 @@
-import anvil.server
 from anvil_extras.logging import Logger
 from anvil_reactive.main import computed, signal
+from anvil.server import no_loading_indicator
+import datetime as dt
 
 try:
     from anvil.designer import in_designer
@@ -19,6 +20,7 @@ def _snakify(text):
 class PersistedClassStore:
     changed = signal(0)
     loading = signal(True)
+    loading_since = dt.datetime.now()
 
     def __init__(self, persisted_class, linked_stores=None, logger=None, cache=None):
         """
@@ -80,8 +82,11 @@ class PersistedClassStore:
             self.refresh()
 
     def refresh(self, **kwargs):
+        self.loading_since = dt.datetime.now()
         self.loading = True
-        self.view = self.persisted_class.get_view()
+        with no_loading_indicator:
+            self.view = self.persisted_class.get_view()
         self._log_action(f"{self._class_name} view refreshed.")
         self.changed += 1
         self.loading = False
+        self.loading_since = None
