@@ -34,3 +34,12 @@ release of Model Classes from Anvil, that module has been superseded and we have
 migrated this app to use those Model Classes in place of any element from persistence.
 
 We just haven't changed the name!
+
+# Installation
+
+To view or run this app within the Anvil IDE:
+
+* Create a new app within your Anvil account
+* Clone this repo to your local machine
+* Add your anvil app as a remote to your local repo
+* Force push the repo to anvil
