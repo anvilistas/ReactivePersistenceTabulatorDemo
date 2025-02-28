@@ -1,5 +1,5 @@
 from anvil.server import portable_class, server_method
-from app.services.exceptions import ChildExists
+from app.services.exceptions import ChildExists, KeyExists
 
 
 class LinkedClass:
@@ -31,6 +31,20 @@ class WithView:
     @classmethod
     def get_view(cls):
         return cls.table.client_readable()
+
+
+@portable_class
+class WithUniqueKey(WithView):
+    key = None
+
+    @classmethod
+    def _do_create(cls, values, from_client):
+        key_value = values[cls.key]
+        search_params = {cls.key: key_value}
+        existing = cls.get_view().search(**search_params)
+        if len(existing) > 0:
+            raise KeyExists(f"An instance with {cls.key}: {key_value} already exists")
+        return super()._do_create(values, from_client)
 
 
 @portable_class

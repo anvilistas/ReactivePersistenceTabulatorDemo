@@ -27,3 +27,8 @@ def portable_exception(cls):
 @portable_exception
 class ChildExists(NamedError):
     pass
+
+
+@portable_exception
+class KeyExists(NamedError):
+    pass
