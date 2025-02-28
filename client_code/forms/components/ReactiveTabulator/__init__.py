@@ -99,12 +99,6 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
         self.raise_event("ready")
 
     @render_effect
-    def loading_visibility(self):
-        if in_designer:
-            return
-        self.loading_panel.visible = self.store.loading
-
-    @render_effect
     def refresh_tabulator(self):
         try:
             _ = self.store.changed
@@ -128,7 +122,7 @@ class ReactiveTabulator(ReactiveTabulatorTemplate):
 
         rows = self.tabulator.getSelectedRows()
         self.tabulator.clear_app_table_cache()
-        self.tabulator.replaceData()
+        self.tabulator.set_data()
         self.tabulator.selectRow([row.getIndex() for row in rows])
 
     def row_click(self, sender, **event_args):
