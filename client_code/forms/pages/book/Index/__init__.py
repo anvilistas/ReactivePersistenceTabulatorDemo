@@ -22,8 +22,6 @@ class Index(WithRoutedSidesheet, IndexTemplate):
 
     def __init__(self, routing_context: router.RoutingContext, **properties):
         self.routing_context = routing_context
+        self.header_panel.store = self.store
         self.init_tabulator()
         self.init_components(**properties)
-
-    def new_button_click(self, **event_args):
-        router.navigate(query={"new": True, "detail": True})
