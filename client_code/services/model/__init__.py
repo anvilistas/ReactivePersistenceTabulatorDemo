@@ -1,12 +1,12 @@
 from anvil.tables import app_tables
 from anvil_reactive.main import reactive_class
 
-from .helpers import LinkedClass, WithLinks, WithView
+from .helpers import LinkedClass, WithLinks, WithUniqueKey
 
 
 @reactive_class
 class Book(
-    WithView, app_tables.book.Row, buffered=True, attrs=True, client_writable=True
+    WithUniqueKey, app_tables.book.Row, buffered=True, attrs=True, client_writable=True
 ):
     table = app_tables.book
     key = "isbn_13"
@@ -15,7 +15,7 @@ class Book(
 @reactive_class
 class Author(
     WithLinks,
-    WithView,
+    WithUniqueKey,
     app_tables.author.Row,
     buffered=True,
     attrs=True,
