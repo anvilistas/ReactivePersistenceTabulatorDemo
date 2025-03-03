@@ -9,6 +9,7 @@ class Book(
     WithUniqueKey, app_tables.book.Row, buffered=True, attrs=True, client_writable=True
 ):
     table = app_tables.book
+    index_title = "Books"
     key = "isbn_13"
 
 
@@ -23,6 +24,7 @@ class Author(
 ):
     table = app_tables.author
     key = "name"
+    index_title = "Authors"
     links = [LinkedClass(Book, column="author", on_delete="restrict")]
 
     def __str__(self):
